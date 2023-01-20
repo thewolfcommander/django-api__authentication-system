@@ -5,5 +5,11 @@ Home page
 {% endblock %}
 
 {% block content %}
+
+{% if user.username %}
+<h1>Welcome, {{ user }}!</h1>
+{% else %}
+<h1>Welcome, new user!</h1>
+{% endif %}
 <!-- Your login form goes here -->
 {% endblock %}
