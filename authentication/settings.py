@@ -55,6 +55,7 @@ SOCIAL_AUTH_GITHUB_SECRET = '8366010cfaf94ded87a1c22faa40151d6ccbf4dc'
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/social-auth/complete/github/'
 
 SESSION_COOKIE_SAMESITE = None
+SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
 
 SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.social_auth.social_details',
