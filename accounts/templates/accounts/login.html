@@ -1,9 +1,16 @@
 {% extends 'base.html' %}
 
 {% block title %}
-Home page
+Login
 {% endblock %}
 
 {% block content %}
-<!-- Your login form goes here -->
+  <h2>Login</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Login</button>
+  </form>
+  <p>
+    Don't have an account? <a href="{% url 'accounts:register' %}">Register</a> here</p>
 {% endblock %}
