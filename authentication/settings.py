@@ -52,6 +52,10 @@ AUTHENTICATION_BACKENDS = (
 SOCIAL_AUTH_GITHUB_KEY = '623993a54ada47acfd29'
 SOCIAL_AUTH_GITHUB_SECRET = '8366010cfaf94ded87a1c22faa40151d6ccbf4dc'
 
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/social-auth/complete/github/'
+
+SESSION_COOKIE_SAMESITE = None
+
 SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.social_auth.social_details',
     'social_core.pipeline.social_auth.social_uid',
@@ -62,13 +66,13 @@ SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.social_auth.associate_user',
     'social_core.pipeline.social_auth.load_extra_data',
     'social_core.pipeline.user.user_details',
-    'accounts.pipeline.redirect_to_profile_completion',
 )
 
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
