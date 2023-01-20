@@ -1,8 +1,10 @@
-from django.contrib.auth import decorators, login, logout
+from django.contrib.auth import decorators, login, logout, models
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
+from django.utils.decorators import method_decorator
 from django.views import View
-from django.views.generic import FormView, TemplateView
+from django.views.generic import FormView, TemplateView, UpdateView
 
 from .forms import UserLoginForm, UserRegisterForm
 
@@ -45,3 +47,17 @@ class LogoutView(View):
     def get(self, request):
         logout(request)
         return redirect('accounts:login')  # or any other page
+    
+
+
+
+@method_decorator(login_required, name='dispatch')
+class CompleteProfileView(UpdateView):
+    model = models.User
+    fields = ['first_name', 'last_name']  # add fields you want to include in the form
+    template_name = 'accounts/complete_profile.html'
+    success_url = reverse_lazy('accounts:home')  # change to where you want to redirect after successful form submission
+
+    def get_object(self, queryset=None):
+        return self.request.user  # assumes 'profile' attribute on your user model
+
