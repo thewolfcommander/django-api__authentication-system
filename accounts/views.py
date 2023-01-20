@@ -1,5 +1,7 @@
-from django.contrib.auth import login, decorators
+from django.contrib.auth import decorators, login, logout
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
+from django.views import View
 from django.views.generic import FormView, TemplateView
 
 from .forms import UserLoginForm, UserRegisterForm
@@ -37,3 +39,9 @@ class UserRegisterView(FormView):
         user = form.save()
         login(self.request, user)
         return super().form_valid(form)
+    
+
+class LogoutView(View):
+    def get(self, request):
+        logout(request)
+        return redirect('accounts:login')  # or any other page

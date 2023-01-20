@@ -6,6 +6,9 @@ Register
 
 {% block content %}
   <h2>Register</h2>
+  {% if request.user.is_authenticated %}
+    <meta http-equiv="REFRESH" content="0;url={% url 'accounts:home' %}">
+  {% else %}
   <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
@@ -13,4 +16,5 @@ Register
   </form>
   <p>
     Already have an account? <a href="{% url 'accounts:login' %}">Login</a> here</p>
+    {% endif %}
 {% endblock %}

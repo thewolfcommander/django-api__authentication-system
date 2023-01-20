@@ -4,8 +4,12 @@
 Login
 {% endblock %}
 
+
 {% block content %}
   <h2>Login</h2>
+  {% if request.user.is_authenticated %}
+    <meta http-equiv="REFRESH" content="0;url={% url 'accounts:home' %}">
+  {% else %}
   <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
@@ -13,4 +17,5 @@ Login
   </form>
   <p>
     Don't have an account? <a href="{% url 'accounts:register' %}">Register</a> here</p>
+  {% endif %}
 {% endblock %}
