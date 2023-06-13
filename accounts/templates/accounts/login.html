@@ -17,5 +17,7 @@ Login
   </form>
   <p>
     Don't have an account? <a href="{% url 'accounts:register' %}">Register</a> here</p>
+
+    <a href="{% url 'social:begin' 'github' %}">Login with GitHub</a>
   {% endif %}
 {% endblock %}
